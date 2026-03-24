@@ -1,0 +1,326 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: verdana;
+}
+
+body {
+    background: url("../Image/Bg.gif") no-repeat center center fixed;
+    background-size : cover;
+}
+
+.header {
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.navbar {
+    width: 95%;
+    display: flex;
+    padding: 15px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.logo {
+    width: 200px;
+    cursor: pointer;
+    margin-left: 60px;
+}
+
+/* MENU */
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+/* LINKS */
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+/* MODERN UNDERLINE (CENTER OUT) */
+.navbar ul li::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00a44a, #00ff95);
+    transition: 0.4s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* HOVER EFFECT */
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+.navbar ul li:hover a {
+    color: #00ff95;
+}
+
+/* BUTTON */
+.navbar .btn {
+    position: relative;
+    padding: 8px 18px;
+    border: 2px solid #00a44a;
+    border-radius: 6px;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 16px;
+    margin-right: 60px;
+    transition: 0.3s;
+}
+
+/* BUTTON BACKGROUND ANIMATION */
+.navbar .btn span {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #00a44a, #00ff95);
+    z-index: -1;
+    transition: 0.4s ease;
+}
+
+/* BUTTON HOVER */
+.navbar .btn:hover span {
+    width: 100%;
+}
+
+.navbar .btn:hover {
+    color: #000;
+    box-shadow: 0 0 10px rgba(0, 255, 149, 0.6);
+}
+
+
+.popup-form {
+    color: #fff;
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.15);
+    width: calc(100% - 20px);
+    max-width: 650px;
+    background: #4e4c4c55;
+    border-radius: 20px;
+    display: grid;
+    gap: 10px;
+    padding: 50px 40px 40px;
+
+    box-shadow: 0px 2px 2px 2px rgba(245, 242, 242, 0.05);
+    z-index: 2;
+    opacity: 0;
+    transition: top 0ms ease-in-out 300ms,
+        transform 300ms ease-in-out 0ms,
+        opacity 300ms ease-in-out 0ms;
+}
+
+.popup-form.active {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: top 0ms ease-in-out 0ms,
+        transform 300ms ease-in-out 0ms,
+        opacity 300ms ease-in-out 0ms;
+}
+
+.popup-form .close-bn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    font-size: 18px;
+    color: #fff;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.popup-form .left {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+}
+
+.popup-form .right h2 {
+    font-size: 28px;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.15;
+    margin-bottom: 10px;
+    color: #fff;
+    justify-content: center;
+    display: flex;
+}
+
+.popup-form .right p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.popup-form .right .form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    margin-top: 7px;
+}
+
+.popup-form .right .form .input {
+    margin-bottom: 20px;
+}
+
+.inputbox {
+    position: relative;
+    width: 250px;
+}
+
+.inputbox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    outline: none;
+    color: #000000;
+    font-size: 1em;
+    border-radius: 5px;
+    transition: 0.25s;
+}
+
+
+@media(min-width:680px) {
+    .popup-form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+.popup-form .right .form button {
+    margin-top: 15px;
+    width: 270px;
+    padding: 10px;
+    font-size: 15px;
+    background-color: rgb(8, 173, 36);
+    border-radius: 20px;
+    cursor: pointer;
+
+    box-shadow: 0px 2px 2px #ddd;
+
+
+    position: absolute;
+
+    color: #ffffff;
+    overflow: hidden;
+
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 20px 50px rgba(151, 52, 52, 0.05);
+}
+
+.popup-form .right .form button:before {
+    position: absolute;
+    width: 100%;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    content: '';
+}
+
+.signup {
+    color: #fff;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.signup::after {
+
+    content: '';
+    position: absolute;
+    width: 0;
+    background: #34ffea;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    transition: 0.5s;
+}
+
+.signup:hover::after {
+    text-decoration: none;
+    width: 100%;
+}
+
+
+.inputbox.has-error input {
+  border: 1px solid red;
+}
+
+.input-error {
+  color: red;
+  font-size: 12px;
+}
+/* Mobile Menu Button */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+    .logo {
+        margin-left: 20px;
+        width: 150px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .navbar ul {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #001632;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        flex-direction: column;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .navbar ul.active {
+        height: 300px;
+    }
+
+    .navbar ul li {
+        display: block;
+        margin: 20px 0;
+    }
+
+    .navbar .btn {
+        margin: 10px auto;
+        display: block;
+    }
+}
