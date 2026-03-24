@@ -11,7 +11,79 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<style>
+    .filter-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    }
 
+.filter-btns button {
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #6366f1;
+    background: transparent;
+    color: #6366f1;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.filter-btns button:hover {
+    background: #6366f1;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Active button */
+.filter-btns button.active {
+    background: #6366f1;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+}
+.search-box {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    border-radius: 30px;
+    padding: 5px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    border-radius: 30px;
+    background: transparent;
+    font-size: 14px;
+}
+
+.search-box button {
+    border: none;
+    color: #00000097;
+    padding: 8px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 14px;
+}
+
+/* Hover effect */
+.search-box button:hover {
+    background: #e300006e;
+    color: #fff;
+    transform: scale(1.00);
+}
+
+/* Click effect */
+.search-box button:active {
+    transform: scale(0.95);
+}
+</style>
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -106,16 +178,20 @@
             <section class="card table-section">
                 <div class="table-header">
                     <h3><i class="fas fa-table-list"></i> តារាងទំនិញ <span>Master Inventory</span></h3>
-                    <div class="table-tools">
-                        <div class="search-box">
-                            <input onkeyup="searchData(this.value)" type="text" id="search"
-                                placeholder="ស្វែងរកតាមឈ្មោះ...">
-                        </div>
-                        <div class="filter-btns">
-                            <button onclick="getSearchMode(this.id)" id="searchTitle" class="active">Title</button>
-                            <button onclick="getSearchMode(this.id)" id="searchCategory">Category</button>
-                        </div>
-                    </div>
+           <div class="table-tools">
+<div class="search-box">
+        <input onkeyup="searchData(this.value)" type="text" id="search"
+            placeholder="ស្វែងរកតាមឈ្មោះ...">
+        <button onclick="searchData(document.getElementById('search').value)">
+            Search
+        </button>
+    </div>
+
+    <div class="filter-btns">
+        <button onclick="getSearchMode(this.id)" id="searchTitle" class="active">Title</button>
+        <button onclick="getSearchMode(this.id)" id="searchCategory">Category</button>
+    </div>
+</div>
                 </div>
 
                 <div id="deleteAll" style="padding: 0 32px;"></div>

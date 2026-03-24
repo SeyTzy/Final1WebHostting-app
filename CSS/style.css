@@ -7,6 +7,7 @@
 body {
     background: url("/Image/bg.gif") no-repeat center center fixed;
     background-size : cover;
+    overflow-x: hidden;
 }
 
 .header {
@@ -189,7 +190,7 @@ body {
 
 .inputbox {
     position: relative;
-    width: 250px;
+    width: 100%;
 }
 
 .inputbox input {
@@ -214,7 +215,8 @@ body {
 
 .popup-form .right .form button {
     margin-top: 15px;
-    width: 270px;
+    width: 100%;
+    position: relative;
     padding: 10px;
     font-size: 15px;
     background-color: rgb(8, 173, 36);
@@ -222,10 +224,6 @@ body {
     cursor: pointer;
 
     box-shadow: 0px 2px 2px #ddd;
-
-
-    position: absolute;
-
     color: #ffffff;
     overflow: hidden;
 
@@ -290,13 +288,16 @@ body {
 
     .logo {
         margin-left: 20px;
-        width: 150px;
+        width: 50%;
     }
 
     .menu-toggle {
         display: block;
     }
-
+    .card table-section {
+        display: none;
+        width: 100%;
+    }
     .navbar ul {
         position: absolute;
         top: 70px;
@@ -322,5 +323,39 @@ body {
     .navbar .btn {
         margin: 10px auto;
         display: block;
+    }
+}
+
+@media (max-width: 679px) {
+    .popup-form {
+        width: 90%;
+        padding: 25px 20px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .popup-form .left {
+        justify-content: center;
+        margin-right: 0;
+    }
+
+    .popup-form .right h2 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .popup-form .right p {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .inputbox {
+        width: 100%;
+    }
+
+    .popup-form .right .form button {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
     }
 }

@@ -582,17 +582,14 @@ h2 {
 }
 
 
-
-
-
 /* Mobile Header */
 .mobile-header {
-    display: none;
+    /* display: none; */
     align-items: center;
     justify-content: space-between;
     padding: 15px 20px;
-    background: var(--bg-card);
-    box-shadow: var(--shadow);
+    /* background: var(--bg-card);
+    box-shadow: var(--shadow); */
 }
 
 .menu-btn {
