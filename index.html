@@ -1,96 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/CSS/style.css" />
-    <title>InvenTrack | Login</title>
-    <link rel="icon" href="/Image/logo_and_icon/film-tape-unscreen.gif" />
-    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.3/dist/dotlottie-wc.js" type="module"></script>
-  </head>
-  <body>
-    <div class="header">
-      <div class="navbar">
-        <img src="/Image/logo.png" class="logo" />
-        <button class="btn" id="open"><span></span>Log In</button>
-      </div>
-    </div>
-
-    <div class="popup-form" id="login-form">
-      <dotlottie-wc
-        src="https://lottie.host/ff3e8212-0390-44df-b51b-7e3fc2021a25/dDSCEgxQ6z.lottie"
-        style="width: 200px;height: 200px"
-        autoplay
-        loop>
-      </dotlottie-wc>
-      <div class="right">
-        <h2>Login</h2>
-        <p></p>
-        <div class="form">
-          <div class="input">
-            <label for="email">Email</label>
-            <div class="inputbox">
-              <input type="text" required id="login-email" placeholder="example@gmail.com.."/>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvenTrack | Smart Inventory Management</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/Image/logo_and_icon/film-tape-unscreen.gif">
+</head>
+<body>
+    <div class="lp-navbar">
+        <nav class="lp-nav">
+            <a href="#" class="lp-logo">
+                <i class="fas fa-cube"></i>
+                <span>InvenTrack</span>
+            </a>
+            <div class="lp-nav-links">
+                <a href="#features">Features</a>
+                <a href="#cta">About</a>
+                <a href="#footer">Contact</a>
+                <button class="lp-btn lp-btn-primary" id="openLogin">
+                    <span>Log In</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
-            <label for="password">Password</label>
-            <div class="inputbox">
-              <input type="password" required id="login-password" placeholder="Enter your password.."/>
-            </div>
-
-            <div class="button">
-              <button>Log In</button>
-            </div>
-          </div>
+            <button class="lp-mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <div class="lp-mobile-menu" id="mobileMenu">
+            <a href="#features">Features</a>
+            <a href="#cta">About</a>
+            <a href="#footer">Contact</a>
+            <button class="lp-btn lp-btn-primary" id="mobileLogin">
+                <span>Log In</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
-        <p>&nbsp;</p>
-      </div>
-      <p class>
-        Don't have an account? &nbsp;<a href="#" class="signup">Sign up</a>
-      </p>
-
-      <button class="close-bn">&times;</button>
     </div>
 
-    <div class="popup-form" id="signup-form">
-      <!-- <div class="left">
-        <img style="border-radius: 50%" src="/Image/1.jpg" alt="" width="100%" />
-      </div> -->
-      <dotlottie-wc
-        src="https://lottie.host/d59ca950-8fdb-42d0-a147-9696da709c93/qlJrKPyHb8.lottie"
-        style="width: 300px;height: 300px"
-        autoplay
-        loop>
-      </dotlottie-wc>
-      <div class="right">
-        <h2>Sign Up</h2>
-        <p></p>
-        <div class="form">
-          <div class="input">
-            <label for="email">Email</label>
-            <div class="inputbox">
-              <input type="text" required id="signup-email" placeholder="example@gmail.com.."/>
-            </div>
-            <label for="password">Password</label>
-            <div class="inputbox">
-              <input type="password" required id="signup-password" placeholder="Enter password.."/>
-            </div>
-            <label for="confirm-password">Confirm Password</label>
-            <div class="inputbox">
-              <input type="password" required id="confirm-password" placeholder="Confirm your password.."/>
-            </div>
-            <div class="button">
-              <button type="button">Sign Up</button>
-            </div>
-          </div>
+    <section class="lp-hero">
+        <div class="lp-hero-bg">
+            <div class="lp-glow lp-glow-1"></div>
+            <div class="lp-glow lp-glow-2"></div>
+            <div class="lp-glow lp-glow-3"></div>
         </div>
-        <p>&nbsp;</p>
-      </div>
-      <p class>
-        Already have account! &nbsp;<a href="#" class="signup" id="goto-login">Log in</a>
-      </p>
-      <button class="close-bn" id="close-signup">&larr;</button>
+        <div class="container">
+            <div class="lp-hero-grid">
+                <div class="lp-hero-text">
+                    <div class="lp-badge">
+                        <i class="fas fa-sparkles"></i>
+                        <span>Next-Gen Inventory Solution</span>
+                    </div>
+                    <h1>Manage Your Inventory <span class="lp-gradient-text">Effortlessly</span></h1>
+                    <p class="lp-hero-desc">Track products, monitor stock levels, and streamline your business operations with our intuitive inventory management platform.</p>
+                    <div class="lp-hero-actions">
+                        <button class="lp-btn lp-btn-primary lp-btn-lg" id="openHero">
+                            Get Started Free
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <a href="#features" class="lp-btn lp-btn-outline lp-btn-lg">
+                            <i class="fas fa-play-circle"></i>
+                            See How It Works
+                        </a>
+                    </div>
+                    <div class="lp-stats">
+                        <div>
+                            <div class="lp-stat-val">10K+</div>
+                            <div class="lp-stat-label">Products Tracked</div>
+                        </div>
+                        <div class="lp-stat-divider"></div>
+                        <div>
+                            <div class="lp-stat-val">500+</div>
+                            <div class="lp-stat-label">Active Users</div>
+                        </div>
+                        <div class="lp-stat-divider"></div>
+                        <div>
+                            <div class="lp-stat-val">99.9%</div>
+                            <div class="lp-stat-label">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lp-hero-visual">
+                    <div class="lp-mockup">
+                        <div class="lp-mockup-bar">
+                            <div class="lp-mockup-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="lp-mockup-title">InvenTrack Dashboard</span>
+                        </div>
+                        <div class="lp-mockup-body">
+                            <div class="lp-mockup-side">
+                                <div class="lp-mockup-nav active"></div>
+                                <div class="lp-mockup-nav"></div>
+                                <div class="lp-mockup-nav"></div>
+                                <div class="lp-mockup-nav"></div>
+                            </div>
+                            <div class="lp-mockup-content">
+                                <div class="lp-mockup-cards">
+                                    <div class="lp-mockup-card"></div>
+                                    <div class="lp-mockup-card"></div>
+                                    <div class="lp-mockup-card"></div>
+                                </div>
+                                <div class="lp-mockup-chart"></div>
+                                <div class="lp-mockup-rows">
+                                    <div class="lp-mockup-row"></div>
+                                    <div class="lp-mockup-row"></div>
+                                    <div class="lp-mockup-row"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lp-features" id="features">
+        <div class="container">
+            <div class="lp-section-header">
+                <span class="lp-section-tag">Features</span>
+                <h2>Everything You Need to <span class="lp-gradient-text">Manage Stock</span></h2>
+                <p>Powerful tools designed to simplify your inventory workflow</p>
+            </div>
+            <div class="lp-features-grid">
+                <div class="lp-feature">
+                    <div class="lp-feature-icon purple"><i class="fas fa-boxes-stacked"></i></div>
+                    <h3>Product Management</h3>
+                    <p>Add, edit, and organize products with detailed information including pricing, categories, and stock levels.</p>
+                </div>
+                <div class="lp-feature">
+                    <div class="lp-feature-icon green"><i class="fas fa-chart-line"></i></div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Get instant insights into inventory value, stock trends, and business performance with live dashboards.</p>
+                </div>
+                <div class="lp-feature">
+                    <div class="lp-feature-icon orange"><i class="fas fa-tags"></i></div>
+                    <h3>Smart Categories</h3>
+                    <p>Organize products into hierarchical categories for easy navigation and automated stock aggregation.</p>
+                </div>
+                <div class="lp-feature">
+                    <div class="lp-feature-icon blue"><i class="fas fa-cart-shopping"></i></div>
+                    <h3>Order Tracking</h3>
+                    <p>Monitor all sales transactions, track order history, and manage customer purchases in one place.</p>
+                </div>
+                <div class="lp-feature">
+                    <div class="lp-feature-icon cyan"><i class="fas fa-users"></i></div>
+                    <h3>User Management</h3>
+                    <p>Control access with role-based permissions. Manage admins, staff, and customer accounts securely.</p>
+                </div>
+                <div class="lp-feature">
+                    <div class="lp-feature-icon pink"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Secure & Reliable</h3>
+                    <p>Your data is protected with enterprise-grade security. Local storage ensures fast, offline-capable access.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lp-cta" id="cta">
+        <div class="container">
+            <div class="lp-cta-card">
+                <h2>Ready to Streamline Your Inventory?</h2>
+                <p>Join hundreds of businesses already using InvenTrack to manage their stock efficiently.</p>
+                <button class="lp-cta-btn" id="openCta">
+                    Start Now - It's Free
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="lp-footer" id="footer">
+        <div class="container">
+            <div class="lp-footer-grid">
+                <div class="lp-footer-brand">
+                    <a href="#" class="lp-logo">
+                        <i class="fas fa-cube"></i>
+                        <span>InvenTrack</span>
+                    </a>
+                    <p>Smart inventory management for modern businesses. Track, analyze, and optimize your stock.</p>
+                </div>
+                <div class="lp-footer-links">
+                    <div class="lp-footer-col">
+                        <h4>Product</h4>
+                        <a href="#features">Features</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">Updates</a>
+                    </div>
+                    <div class="lp-footer-col">
+                        <h4>Company</h4>
+                        <a href="#cta">About</a>
+                        <a href="#">Careers</a>
+                        <a href="#footer">Contact</a>
+                    </div>
+                    <div class="lp-footer-col">
+                        <h4>Support</h4>
+                        <a href="#">Documentation</a>
+                        <a href="#">Help Center</a>
+                        <a href="#">Community</a>
+                    </div>
+                </div>
+            </div>
+            <div class="lp-footer-bottom">
+                <p>&copy; 2026 InvenTrack. Built with precision.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="lp-modal" id="loginModal">
+        <button class="lp-modal-close" id="closeLogin">&times;</button>
+        <div class="lp-modal-logo">
+            <i class="fas fa-cube"></i>
+            <span>InvenTrack</span>
+        </div>
+        <h2>Welcome Back</h2>
+        <p class="modal-sub">Sign in to access your inventory dashboard</p>
+        <form class="lp-modal-form" id="loginForm">
+            <div class="lp-input">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="loginEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="lp-input">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="lp-submit">
+                <span>Sign In</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+        <div class="lp-modal-footer">
+            <p>Don't have an account? <a href="#" id="goToSignup">Create one</a></p>
+            <p class="modal-contact-link">Need help? <a href="./HTML/contact.html" target="_blank">Contact us</a></p>
+        </div>
     </div>
-    <script src="./JS/OpenLogin.js"></script>
-    <script src="./JS/Login.js"></script>
-  </body>
+
+    <div class="lp-modal" id="signupModal">
+        <button class="lp-modal-close" id="closeSignup">&times;</button>
+        <div class="lp-modal-logo">
+            <i class="fas fa-cube"></i>
+            <span>InvenTrack</span>
+        </div>
+        <h2>Create Account</h2>
+        <p class="modal-sub">Get started with your free inventory management account</p>
+        <form class="lp-modal-form" id="signupForm">
+            <div class="lp-input">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="signupEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="lp-input">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="signupPassword" placeholder="Min. 6 characters" required>
+            </div>
+            <div class="lp-input">
+                <i class="fas fa-shield-halved"></i>
+                <input type="password" id="signupConfirm" placeholder="Re-enter password" required>
+            </div>
+            <button type="submit" class="lp-submit">
+                <span>Create Account</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </form>
+        <div class="lp-modal-footer">
+            <p>Already have an account? <a href="#" id="goToLogin">Sign in</a></p>
+        </div>
+    </div>
+
+    <script src="./JS/auth.js"></script>
+    <script src="./JS/login.js"></script>
+</body>
 </html>

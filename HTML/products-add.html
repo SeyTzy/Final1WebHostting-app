@@ -1,160 +1,109 @@
 <!DOCTYPE html>
-<html lang="km">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InvenTrack | Add Product</title>
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Hanuman:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <a href="dashboard.html"><i class="fas fa-cube"></i><span>InvenTrack</span></a>
+            </div>
+            <div class="sidebar-profile">
                 <div class="profile-card">
-                    <img src="/Image/My Pf.jpg">
-                    <h2>THOEURN SEYHAT</h2>
-                    <p>Web Developer</p>
+                    <img src="/Image/My Pf.jpg" alt="Profile" class="profile-avatar">
+                    <div><div class="profile-name">THOEURN SEYHAT</div><div class="profile-role">Web Developer</div><div class="profile-contact"><a href="contact.html"><i class="fas fa-envelope"></i> thoeurnseyhat@gmail.com</a></div></div>
                 </div>
             </div>
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    <span>ផ្ទាំងគ្រប់គ្រង <span>Dashboard</span></span>
-                </a>
-
-                <!-- Product Menu (Open by default) -->
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
                 <div class="nav-group">
-                    <button class="nav-item open">
-                        <i class="fas fa-box-archive"></i>
-                        <span>ទំនិញ <span>Products</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="products-add.html" class="submenu-item active">បន្ថែមទំនិញ (Add)</a>
-                        <a href="products-list.html" class="submenu-item">បញ្ជីទំនិញ (List)</a>
+                    <button class="nav-toggle open"><i class="fas fa-box-archive"></i><span>Products</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="products-add.html" class="sub-link active">Add Product</a>
+                        <a href="products-list.html" class="sub-link">Product List</a>
                     </div>
                 </div>
-
-                <!-- Other Menus -->
                 <div class="nav-group">
-                    <button class="nav-item">
-                        <i class="fas fa-layer-group"></i>
-                        <span>ប្រភេទ <span>Categories</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="categories-add.html" class="submenu-item">បន្ថែមប្រភេទ (Add)</a>
-                        <a href="categories-list.html" class="submenu-item">បញ្ជីប្រភេទ (List)</a>
+                    <button class="nav-toggle"><i class="fas fa-layer-group"></i><span>Categories</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="categories-add.html" class="sub-link">Add Category</a>
+                        <a href="categories-list.html" class="sub-link">Category List</a>
                     </div>
                 </div>
-
                 <div class="nav-group">
-                    <button class="nav-item">
-                        <i class="fas fa-cart-shopping"></i>
-                        <span>ការកម្ម៉ង់ <span>Orders</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="orders-add.html" class="submenu-item">បន្ថែមការកម្ម៉ង់ (Add)</a>
-                        <a href="orders-list.html" class="submenu-item">បញ្ជីការកម្ម៉ង់ (List)</a>
+                    <button class="nav-toggle"><i class="fas fa-cart-shopping"></i><span>Orders</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="orders-add.html" class="sub-link">Add Order</a>
+                        <a href="orders-list.html" class="sub-link">Order List</a>
                     </div>
                 </div>
-
                 <div class="nav-group">
-                    <button class="nav-item">
-                        <i class="fas fa-user-group"></i>
-                        <span>អ្នកប្រើប្រាស់ <span>Users</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="users-add.html" class="submenu-item">បន្ថែមអ្នកប្រើ (Add)</a>
-                        <a href="users-list.html" class="submenu-item">បញ្ជីអ្នកប្រើ (List)</a>
+                    <button class="nav-toggle"><i class="fas fa-user-group"></i><span>Users</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="users-add.html" class="sub-link">Add User</a>
+                        <a href="users-list.html" class="sub-link">User List</a>
                     </div>
                 </div>
-
-                <a href="settings.html" class="nav-item">
-                    <i class="fas fa-sliders"></i>
-                    <span>ការកំណត់ <span>Settings</span></span>
-                </a>
+                <a href="settings.html" class="nav-link"><i class="fas fa-sliders"></i><span>Settings</span></a>
             </nav>
             <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">AD</div>
-                    <div class="user-info">
-                        <span class="user-name">Admin User</span>
-                        <span class="user-role">Administrator</span>
-                    </div>
+                <div class="user-row">
+                    <div class="user-avatar-sm">AD</div>
+                    <div><div class="user-name-sm">Admin User</div><div class="user-role-sm">Administrator</div></div>
                 </div>
             </div>
         </aside>
-
-        <main class="main-content">
-            <header class="content-header">
-                <h1>បន្ថែមទំនិញថ្មី</h1>
-                <p>Register a new product in your inventory.</p>
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <div class="main">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                    <span class="topbar-title">Products</span>
+                </div>
+                <div class="topbar-right">
+                    <a href="products-list.html" class="btn btn-secondary btn-sm"><i class="fas fa-list"></i> View List</a>
+                </div>
             </header>
-
-            <section class="card">
-                <div class="card-header">
-                    <h3 id="formTitle"><i class="fas fa-plus-circle"></i> បញ្ចូលទិន្នន័យទំនិញថ្មី <span>New Product
-                            Entry</span></h3>
+            <main class="content">
+                <div class="page-header">
+                    <h1 class="page-title" id="formTitle">Add New Product</h1>
+                    <p class="page-desc">Register a new product in your inventory.</p>
                 </div>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>ឈ្មោះទំនិញ <span>Product Title</span></label>
-                        <input type="text" id="title" placeholder="បញ្ចូលឈ្មោះទំនិញ...">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>តម្លៃដើម <span>Price</span></label>
-                            <input onkeyup="getTotal()" type="number" id="price" placeholder="0.00">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group" style="margin-bottom:16px">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-input" id="pName" placeholder="Enter product name...">
                         </div>
-                        <div class="form-group">
-                            <label>ពន្ធ <span>Taxes</span></label>
-                            <input onkeyup="getTotal()" type="number" id="taxes" placeholder="0.00">
+                        <div class="form-row" style="margin-bottom:16px">
+                            <div class="form-group"><label class="form-label">Price</label><input type="number" class="form-input" id="pPrice" placeholder="0.00" onkeyup="calcTotal()"></div>
+                            <div class="form-group"><label class="form-label">Taxes</label><input type="number" class="form-input" id="pTaxes" placeholder="0.00" onkeyup="calcTotal()"></div>
+                            <div class="form-group"><label class="form-label">Ads</label><input type="number" class="form-input" id="pAds" placeholder="0.00" onkeyup="calcTotal()"></div>
+                            <div class="form-group"><label class="form-label">Discount</label><input type="number" class="form-input" id="pDiscount" placeholder="0.00" onkeyup="calcTotal()"></div>
                         </div>
-                        <div class="form-group">
-                            <label>ពាណិជ្ជកម្ម <span>Ads</span></label>
-                            <input onkeyup="getTotal()" type="number" id="ads" placeholder="0.00">
-                        </div>
-                        <div class="form-group">
-                            <label>បញ្ចុះតម្លៃ <span>Discount</span></label>
-                            <input onkeyup="getTotal()" type="number" id="discount" placeholder="0.00">
-                        </div>
-                    </div>
-                    <div class="form-row" style="align-items: flex-end;">
-                        <div class="form-group" style="flex: 2;">
-                            <div class="price-preview">
-                                <span>តម្លៃសរុប Total:</span>
-                                <div id="total">0</div>
+                        <div class="form-row" style="margin-bottom:16px; align-items:end">
+                            <div class="form-group" style="flex:2">
+                                <div class="price-preview"><span class="price-label">Total Price</span><span class="price-val" id="pTotal">0</span></div>
                             </div>
+                            <div class="form-group" id="qtyWrap"><label class="form-label">Quantity</label><input type="number" class="form-input" id="pQty" placeholder="1" onkeyup="calcTotal()"></div>
+                            <div class="form-group"><label class="form-label">Category</label><select class="form-input" id="pCategory"><option value="">Select category...</option></select></div>
                         </div>
-                        <div class="form-group" id="countGroup">
-                            <label>ចំនួន <span>Count</span></label>
-                            <input type="number" id="count" placeholder="1">
+                        <div class="form-actions">
+                            <button class="btn btn-primary" id="submitBtn"><i class="fas fa-save"></i> Save Product</button>
                         </div>
-                        <div class="form-group">
-                            <label>ប្រភេទ <span>Category</span></label>
-                            <input type="text" id="category" placeholder="Electronics...">
-                        </div>
-                    </div>
-                    <div class="form-actions" style="margin-top: 10px;">
-                        <button id="submit" class="btn-primary">រក្សាទុកទំនិញ (Save Product)</button>
                     </div>
                 </div>
-            </section>
-        </main>
+            </main>
+        </div>
     </div>
-
-    <script src="../JS/index.js"></script>
     <script src="../JS/common.js"></script>
+    <script src="../JS/settings.js"></script>
+    <script src="../JS/categories.js"></script>
+    <script src="../JS/products.js"></script>
 </body>
-
 </html>

@@ -1,96 +1,87 @@
-// Orders Logic
-let orderCustomer = document.getElementById('orderCustomer');
-let orderProduct = document.getElementById('orderProduct');
-let orderQty = document.getElementById('orderQty');
-let submitOrder = document.getElementById('submitOrder');
+var orders = JSON.parse(localStorage.getItem("inven_orders") || "[]");
 
-let dataOrders = JSON.parse(localStorage.getItem('orders')) || [];
-
-let mood = 'create';
-let tmp;
-
-if (submitOrder) {
-    submitOrder.onclick = function () {
-        let newOrder = {
-            customer: orderCustomer.value,
-            product: orderProduct.value,
-            qty: orderQty.value || 1,
-            date: new Date().toLocaleDateString()
-        };
-
-        if (orderCustomer.value != '' && orderProduct.value != '') {
-            if (mood === 'create') {
-                dataOrders.push(newOrder);
-            } else {
-                dataOrders[tmp] = newOrder;
-                mood = 'create';
-                submitOrder.innerHTML = 'បង្កើតការកម្ម៉ង់ (Create Order)';
-            }
-            localStorage.setItem('orders', JSON.stringify(dataOrders));
-            orderCustomer.value = '';
-            orderProduct.value = '';
-            orderQty.value = '';
-            alert('រួចរាល់!');
-        } else {
-            alert('សូមបំពេញព័ត៌មានអតិថិជន និងទំនិញ!');
-        }
-    }
+function saveOrders() {
+    localStorage.setItem("inven_orders", JSON.stringify(orders));
 }
 
-function showOrders() {
-    let table = '';
-    dataOrders.forEach((order, i) => {
-        table += `
-        <tr>
-            <td>${i + 1}</td>
-            <td>${order.customer}</td>
-            <td>${order.product}</td>
-            <td>${order.qty}</td>
-            <td style="font-weight:700; color:var(--primary)">Processing...</td>
-            <td>${order.date}</td>
-            <td>
-                <button onclick="updateOrder(${i})" class="update-btn"><i class="fas fa-edit"></i></button>
-                <button onclick="deleteOrder(${i})" class="delete-btn"><i class="fas fa-trash"></i></button>
-            </td>
-        </tr>
-        `;
-    });
-    let orderBody = document.getElementById('orderBody');
-    if (orderBody) orderBody.innerHTML = table || '<tr><td colspan="7" style="text-align:center; padding: 40px;">មិនទាន់មានការកម្ម៉ង់ទេ</td></tr>';
+function renderOrders() {
+    var body = document.getElementById("orderBody");
+    if (!body) return;
+
+    var html = "";
+    if (orders.length === 0) {
+        html = "<tr><td colspan='7' class='empty-state'><i class='fas fa-receipt'></i><div>No orders yet</div></td></tr>";
+    } else {
+        for (var i = 0; i < orders.length; i++) {
+            var o = orders[i];
+            html += "<tr>";
+            html += "<td>" + (i + 1) + "</td>";
+            html += "<td>" + o.customer + "</td>";
+            html += "<td>" + o.product + "</td>";
+            html += "<td>" + o.qty + "</td>";
+            html += "<td style='font-weight:600;color:var(--primary)'>" + formatMoney(o.total) + "</td>";
+            html += "<td>" + (o.date || "—") + "</td>";
+            html += "<td><button onclick='editOrder(" + i + ")' class='btn-icon edit' title='Edit'><i class='fas fa-edit'></i></button><button onclick='deleteOrder(" + i + ")' class='btn-icon delete' title='Delete'><i class='fas fa-trash'></i></button></td>";
+            html += "</tr>";
+        }
+    }
+    body.innerHTML = html;
+}
+
+function editOrder(i) {
+    var o = orders[i];
+    var newCustomer = prompt("Customer:", o.customer);
+    if (newCustomer === null) return;
+    var newProduct = prompt("Product:", o.product);
+    if (newProduct === null) return;
+    var newQty = prompt("Qty:", o.qty);
+    if (newQty === null) return;
+    var newTotal = prompt("Total:", o.total);
+    if (newTotal === null) return;
+    if (newCustomer.trim() && newProduct.trim()) {
+        orders[i].customer = newCustomer.trim();
+        orders[i].product = newProduct.trim();
+        orders[i].qty = newQty ? Number(newQty) : 1;
+        orders[i].total = newTotal || "0";
+        saveOrders();
+        renderOrders();
+    }
 }
 
 function deleteOrder(i) {
-    dataOrders.splice(i, 1);
-    localStorage.setItem('orders', JSON.stringify(dataOrders));
-    showOrders();
+    orders.splice(i, 1);
+    saveOrders();
+    renderOrders();
 }
 
-function updateOrder(i) {
-    if (!orderCustomer || !submitOrder) {
-        // We are on the List page, redirect to Add page
-        localStorage.setItem('editOrderIndex', i);
-        location.href = 'orders-add.html';
-        return;
-    }
+var submitOrderBtn = document.getElementById("submitOrder");
+if (submitOrderBtn) {
+    submitOrderBtn.addEventListener("click", function() {
+        var customer = document.getElementById("oCustomer");
+        var product = document.getElementById("oProduct");
+        var qty = document.getElementById("oQty");
+        var total = document.getElementById("oTotal");
 
-    if (orderCustomer) {
-        orderCustomer.value = dataOrders[i].customer;
-        orderProduct.value = dataOrders[i].product;
-        orderQty.value = dataOrders[i].qty;
-        submitOrder.innerHTML = 'កែប្រែការកម្ម៉ង់ (Update Order)';
-        mood = 'update';
-        tmp = i;
-        scroll({ top: 0, behavior: 'smooth' });
-    }
+        if (!customer || !customer.value.trim() || !product || !product.value.trim()) {
+            alert("Please fill in customer and product.");
+            return;
+        }
+
+        orders.push({
+            customer: customer.value.trim(),
+            product: product.value.trim(),
+            qty: qty && qty.value ? qty.value : 1,
+            total: total && total.value ? total.value : "0",
+            date: new Date().toLocaleDateString()
+        });
+
+        saveOrders();
+        customer.value = "";
+        product.value = "";
+        if (qty) qty.value = "";
+        if (total) total.value = "";
+        renderOrders();
+    });
 }
 
-// Logic for cross-page Editing
-if (localStorage.getItem('editOrderIndex') !== null) {
-    let i = localStorage.getItem('editOrderIndex');
-    localStorage.removeItem('editOrderIndex');
-    window.onload = function() {
-        updateOrder(i);
-    }
-}
-
-showOrders();
+renderOrders();

@@ -20,14 +20,13 @@ let statAvgPrice = document.getElementById('statAvgPrice');
 let mood = 'create';
 let tmp;
 
-// 1. get total (Strict Tutorial Logic)
+// 1. get total
 function getTotal() {
     if (price && price.value != '') {
         let countVal = (count && count.value > 0) ? +count.value : 1;
         let result = ((+price.value + +taxes.value + +ads.value) - +discount.value) * countVal;
         if (total) total.innerHTML = result.toFixed(2);
 
-        // Modern SaaS feedback: Add success class
         let preview = document.querySelector('.price-preview');
         if (preview) preview.classList.add('success');
     } else {
@@ -45,7 +44,7 @@ if (localStorage.getItem('product') != null) {
     dataPro = [];
 }
 
-// 3. Create & Update logic (Strict Tutorial Match for Count)
+// 3. Create & Update logic
 if (submit) {
     submit.onclick = function () {
         let newPro = {
@@ -59,25 +58,23 @@ if (submit) {
             category: category.value.toLowerCase(),
         }
 
-        // Validation
         if (title.value != '' && price.value != '' && category.value != '' && newPro.count < 1000) {
             if (mood === 'create') {
                 dataPro.push(newPro);
             } else {
                 dataPro[tmp] = newPro;
                 mood = 'create';
-                submit.innerHTML = 'រក្សាទុកទិន្នន័យ (Save Data)';
-                if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> បញ្ចូលទិន្នន័យថ្មី (Create Product)';
+                submit.innerHTML = '<i class="fas fa-save"></i> Save Product';
+                if (formTitle) formTitle.innerHTML = '<i class="fas fa-plus-circle"></i> New Product Entry';
             }
 
-            // save localstorage
             localStorage.setItem('product', JSON.stringify(dataPro));
 
             clearData();
             showData();
             updateStats();
         } else {
-            alert('សូមបំពេញព័ត៌មានអោយបានគ្រប់គ្រាន់ (ឈ្មោះ តម្លៃ និងប្រភេទ)!');
+            alert('Please fill in all required fields (Name, Price, and Category)!');
         }
     }
 }
@@ -100,13 +97,11 @@ function showData() {
     let tbody = document.getElementById('tbody');
     if (!tbody) return;
 
-    // Detect if we are on Dashboard or List Page
     let isDashboard = document.title.includes("Dashboard");
     let table = '';
 
     for (let i = 0; i < dataPro.length; i++) {
         if (isDashboard) {
-            // Summary view (4 columns)
             table += `
             <tr>
                 <td>${i + 1}</td>
@@ -116,7 +111,6 @@ function showData() {
             </tr>
             `;
         } else {
-            // Detailed view (7 columns)
             table += `
             <tr>
                 <td>${i + 1}</td>
@@ -126,20 +120,20 @@ function showData() {
                 <td style="font-weight: 700; color: var(--primary)">$${dataPro[i].total}</td>
                 <td><span class="badge">${dataPro[i].category}</span></td>
                 <td>
-                    <button onclick="updateData(${i})" class="update-btn" title="កែប្រែ"><i class="fas fa-edit"></i></button>
-                    <button onclick="deleteData(${i})" class="delete-btn" title="លុប"><i class="fas fa-trash"></i></button>
+                    <button onclick="updateData(${i})" class="update-btn" title="Edit"><i class="fas fa-edit"></i></button>
+                    <button onclick="deleteData(${i})" class="delete-btn" title="Delete"><i class="fas fa-trash"></i></button>
                 </td>
             </tr>
             `;
         }
     }
-    tbody.innerHTML = table || (isDashboard ? '<tr><td colspan="4" style="text-align:center; padding: 20px;">មិនមានទិន្នន័យ</td></tr>' : '<tr><td colspan="7" style="text-align:center; padding: 40px;">មិនមានទិន្នន័យ</td></tr>');
+    tbody.innerHTML = table || (isDashboard ? '<tr><td colspan="4" style="text-align:center; padding: 20px;">No data available</td></tr>' : '<tr><td colspan="7" style="text-align:center; padding: 40px;">No data available</td></tr>');
 
     let btnDelete = document.getElementById('deleteAll');
     if (btnDelete && !isDashboard) {
         if (dataPro.length > 0) {
             btnDelete.innerHTML = `
-            <button onclick="deleteAll()" class="btn-danger-outline"><i class="fas fa-trash-sweep"></i> លុបទិន្នន័យទាំងអស់ (${dataPro.length})</button>
+            <button onclick="deleteAll()" class="btn-danger-outline"><i class="fas fa-trash"></i> Delete All (${dataPro.length})</button>
             `
         } else {
             btnDelete.innerHTML = '';
@@ -161,7 +155,7 @@ function updateStats() {
     if (statAvgPrice) statAvgPrice.innerHTML = '$' + avgPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
-// 7. Delete (Tutorial Logic)
+// 7. Delete
 function deleteData(i) {
     dataPro.splice(i, 1);
     localStorage.setItem('product', JSON.stringify(dataPro));
@@ -169,7 +163,7 @@ function deleteData(i) {
     updateStats();
 }
 
-// 8. Delete All (Tutorial Logic)
+// 8. Delete All
 function deleteAll() {
     localStorage.removeItem('product');
     dataPro.splice(0);
@@ -180,7 +174,6 @@ function deleteAll() {
 // 9. Update
 function updateData(i) {
     if (!title || !submit) {
-        // We are on the List page, redirect to Add page
         localStorage.setItem('editIndex', i);
         location.href = 'products-add.html';
         return;
@@ -195,8 +188,8 @@ function updateData(i) {
     if (count) count.value = dataPro[i].count;
     getTotal();
 
-    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit"></i> កែប្រែទិន្នន័យ (Update Product)';
-    if (submit) submit.innerHTML = 'កែប្រែទិន្នន័យ (Update Data)';
+    if (formTitle) formTitle.innerHTML = '<i class="fas fa-edit"></i> Update Product';
+    if (submit) submit.innerHTML = '<i class="fas fa-save"></i> Update Product';
     mood = 'update';
     tmp = i;
 
@@ -209,8 +202,7 @@ function updateData(i) {
 // Logic for cross-page Editing
 if (localStorage.getItem('editIndex') !== null) {
     let i = localStorage.getItem('editIndex');
-    localStorage.removeItem('editIndex'); // Clear it so it doesn't loop
-    // Wait for DOM and variables to be ready
+    localStorage.removeItem('editIndex');
     window.onload = function() {
         updateData(i);
     }
@@ -221,7 +213,7 @@ if (count) {
     count.onkeyup = getTotal;
 }
 
-// 10. Search (Tutorial Toggle Logic)
+// 10. Search
 let searchMode = 'title';
 
 function getSearchMode(id) {
@@ -239,7 +231,7 @@ function getSearchMode(id) {
         if (titleBtn) titleBtn.classList.remove('active');
     }
     if (search) {
-        search.placeholder = 'ស្វែងរកតាម ' + (searchMode === 'title' ? 'ឈ្មោះ' : 'ប្រភេទ') + '...';
+        search.placeholder = 'Search by ' + (searchMode === 'title' ? 'name' : 'category') + '...';
         search.focus();
         search.value = '';
     }
@@ -271,9 +263,7 @@ function searchData(value) {
                     <td>${i + 1}</td>
                     <td>${dataPro[i].title}</td>
                     <td>$${dataPro[i].price}</td>
-                    <td>$${dataPro[i].taxes}</td>
-                    <td>$${dataPro[i].ads}</td>
-                    <td>$${dataPro[i].discount}</td>
+                    <td>${dataPro[i].count}</td>
                     <td style="font-weight: 700; color: var(--primary)">$${dataPro[i].total}</td>
                     <td><span class="badge">${dataPro[i].category}</span></td>
                     <td>
@@ -286,7 +276,7 @@ function searchData(value) {
     }
 
     if (!found && value != '') {
-        table = `<tr><td colspan="9" style="text-align: center; padding: 40px; color: var(--text-dim)">មិនមានទិន្នន័យ " ${value} " ទេ!</td></tr>`;
+        table = `<tr><td colspan="7" style="text-align: center; padding: 40px; color: var(--text-dim)">No results found for "${value}"</td></tr>`;
     }
 
     tbody.innerHTML = table;
@@ -296,17 +286,19 @@ function searchData(value) {
 showData();
 updateStats();
 
-
+// Mobile sidebar toggle
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.querySelector(".sidebar");
 const overlay = document.getElementById("overlay");
 
-menuBtn.onclick = () => {
-    sidebar.classList.add("active");
-    overlay.classList.add("active");
-};
+if (menuBtn && sidebar && overlay) {
+    menuBtn.onclick = () => {
+        sidebar.classList.add("active");
+        overlay.classList.add("active");
+    };
 
-overlay.onclick = () => {
-    sidebar.classList.remove("active");
-    overlay.classList.remove("active");
-};
+    overlay.onclick = () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+    };
+}

@@ -1,232 +1,106 @@
 <!DOCTYPE html>
-<html lang="km">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InvenTrack | Product List</title>
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Hanuman:wght@400;700&display=swap"
-        rel="stylesheet">
+    <title>InvenTrack | Products</title>
+    <link rel="stylesheet" href="../CSS/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<style>
-    .filter-btns {
-    display: flex;
-    gap: 10px;
-    margin-top: 5px;
-    }
-
-.filter-btns button {
-    padding: 8px 18px;
-    border-radius: 20px;
-    border: 1px solid #6366f1;
-    background: transparent;
-    color: #6366f1;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Hover effect */
-.filter-btns button:hover {
-    background: #6366f1;
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-/* Active button */
-.filter-btns button.active {
-    background: #6366f1;
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
-}
-.search-box {
-    display: flex;
-    align-items: center;
-    background: #f1f5f9;
-    border-radius: 30px;
-    padding: 5px;
-    width: 100%;
-    max-width: 350px;
-}
-
-.search-box input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 10px 15px;
-    border-radius: 30px;
-    background: transparent;
-    font-size: 14px;
-}
-
-.search-box button {
-    border: none;
-    color: #00000097;
-    padding: 8px 15px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    font-size: 14px;
-}
-
-/* Hover effect */
-.search-box button:hover {
-    background: #e300006e;
-    color: #fff;
-    transform: scale(1.00);
-}
-
-/* Click effect */
-.search-box button:active {
-    transform: scale(0.95);
-}
-</style>
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <a href="dashboard.html"><i class="fas fa-cube"></i><span>InvenTrack</span></a>
+            </div>
+            <div class="sidebar-profile">
                 <div class="profile-card">
-                    <img src="/Image/My Pf.jpg">
-                    <h2>THOEURN SEYHAT</h2>
-                    <p>Web Developer</p>
+                    <img src="/Image/My Pf.jpg" alt="Profile" class="profile-avatar">
+                    <div><div class="profile-name">THOEURN SEYHAT</div><div class="profile-role">Web Developer</div><div class="profile-contact"><a href="contact.html"><i class="fas fa-envelope"></i> thoeurnseyhat@gmail.com</a></div></div>
                 </div>
             </div>
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item">
-                    <i class="fas fa-home"></i>
-                    <span>ផ្ទាំងគ្រប់គ្រង <span>Dashboard</span></span>
-                </a>
-
-                <!-- Product Menu -->
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
                 <div class="nav-group">
-                    <button class="nav-item open">
-                        <i class="fas fa-box-archive"></i>
-                        <span>ទំនិញ <span>Products</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="products-add.html" class="submenu-item">បន្ថែមទំនិញ (Add)</a>
-                        <a href="products-list.html" class="submenu-item active">បញ្ជីទំនិញ (List)</a>
+                    <button class="nav-toggle open"><i class="fas fa-box-archive"></i><span>Products</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="products-add.html" class="sub-link">Add Product</a>
+                        <a href="products-list.html" class="sub-link active">Product List</a>
                     </div>
                 </div>
-
-                <!-- Categories Menu -->
                 <div class="nav-group">
-                    <button class="nav-item">
-                        <i class="fas fa-layer-group"></i>
-                        <span>ប្រភេទ <span>Categories</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="categories-add.html" class="submenu-item">បន្ថែមប្រភេទ (Add)</a>
-                        <a href="categories-list.html" class="submenu-item">បញ្ជីប្រភេទ (List)</a>
+                    <button class="nav-toggle"><i class="fas fa-layer-group"></i><span>Categories</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="categories-add.html" class="sub-link">Add Category</a>
+                        <a href="categories-list.html" class="sub-link">Category List</a>
                     </div>
                 </div>
-
-                <!-- Order Menu -->
                 <div class="nav-group">
-                    <button class="nav-item">
-                        <i class="fas fa-cart-shopping"></i>
-                        <span>ការកម្ម៉ង់ <span>Orders</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="orders-add.html" class="submenu-item">បន្ថែមការកម្ម៉ង់ (Add)</a>
-                        <a href="orders-list.html" class="submenu-item">បញ្ជីការកម្ម៉ង់ (List)</a>
+                    <button class="nav-toggle"><i class="fas fa-cart-shopping"></i><span>Orders</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="orders-add.html" class="sub-link">Add Order</a>
+                        <a href="orders-list.html" class="sub-link">Order List</a>
                     </div>
                 </div>
-
-                <!-- User Menu -->
                 <div class="nav-group">
-                    <button class="nav-item">
-                        <i class="fas fa-user-group"></i>
-                        <span>អ្នកប្រើប្រាស់ <span>Users</span></span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <div class="submenu">
-                        <a href="users-add.html" class="submenu-item">បន្ថែមអ្នកប្រើ (Add)</a>
-                        <a href="users-list.html" class="submenu-item">បញ្ជីអ្នកប្រើ (List)</a>
+                    <button class="nav-toggle"><i class="fas fa-user-group"></i><span>Users</span><i class="fas fa-chevron-right nav-arrow"></i></button>
+                    <div class="sub-nav">
+                        <a href="users-add.html" class="sub-link">Add User</a>
+                        <a href="users-list.html" class="sub-link">User List</a>
                     </div>
                 </div>
-
-                <a href="settings.html" class="nav-item">
-                    <i class="fas fa-sliders"></i>
-                    <span>ការកំណត់ <span>Settings</span></span>
-                </a>
+                <a href="settings.html" class="nav-link"><i class="fas fa-sliders"></i><span>Settings</span></a>
             </nav>
             <div class="sidebar-footer">
-                <div class="user-profile">
-                    <div class="avatar">AD</div>
-                    <div class="user-info">
-                        <span class="user-name">Admin User</span>
-                        <span class="user-role">Administrator</span>
-                    </div>
+                <div class="user-row">
+                    <div class="user-avatar-sm">AD</div>
+                    <div><div class="user-name-sm">Admin User</div><div class="user-role-sm">Administrator</div></div>
                 </div>
             </div>
         </aside>
-
-        <main class="main-content">
-            <header class="content-header">
-                <h1>បញ្ជីទំនិញទាំងអស់</h1>
-                <p>View and manage all items in your stock.</p>
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <div class="main">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                    <span class="topbar-title">Products</span>
+                </div>
+                <div class="topbar-right">
+                    <a href="products-add.html" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Add Product</a>
+                </div>
             </header>
-
-            <section class="card table-section">
-                <div class="table-header">
-                    <h3><i class="fas fa-table-list"></i> តារាងទំនិញ <span>Master Inventory</span></h3>
-           <div class="table-tools">
-<div class="search-box">
-        <input onkeyup="searchData(this.value)" type="text" id="search"
-            placeholder="ស្វែងរកតាមឈ្មោះ...">
-        <button onclick="searchData(document.getElementById('search').value)">
-            Search
-        </button>
-    </div>
-
-    <div class="filter-btns">
-        <button onclick="getSearchMode(this.id)" id="searchTitle" class="active">Title</button>
-        <button onclick="getSearchMode(this.id)" id="searchCategory">Category</button>
-    </div>
-</div>
+            <main class="content">
+                <div class="page-header">
+                    <h1 class="page-title">Product List</h1>
+                    <p class="page-desc">View and manage all items in your inventory.</p>
                 </div>
-
-                <div id="deleteAll" style="padding: 0 32px;"></div>
-
-                <div class="table-wrapper">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>ឈ្មោះទំនិញ</th>
-                                <th>តម្លៃ</th>
-                                <th>ចំនួន</th>
-                                <th>សរុប</th>
-                                <th>ប្រភេទ</th>
-                                <th>សកម្មភាព</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                            <!-- Data -->
-                        </tbody>
-                    </table>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title"><i class="fas fa-table"></i> Master Inventory</div>
+                        <div class="toolbar">
+                            <div class="search-bar">
+                                <input type="text" id="searchInput" placeholder="Search products..." onkeyup="handleSearch(this.value)">
+                                <button onclick="handleSearch(document.getElementById('searchInput').value)">Search</button>
+                            </div>
+                            <div class="filter-btns">
+                                <button id="filterName" class="active" onclick="setFilter('name', this)">Name</button>
+                                <button id="filterCategory" onclick="setFilter('category', this)">Category</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="deleteAllWrap"></div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead><tr><th>#</th><th>Name</th><th>Price</th><th>Qty</th><th>Total</th><th>Category</th><th>Actions</th></tr></thead>
+                            <tbody id="productBody"></tbody>
+                        </table>
+                    </div>
                 </div>
-            </section>
-        </main>
+            </main>
+        </div>
     </div>
-
-    <!-- Hidden inputs for logic compatibility without creating separate JS just yet -->
-    <div style="display:none">
-        <input id="title"><input id="price"><input id="taxes"><input id="ads"><input id="discount">
-        <input id="category">
-        <div id="total"></div><input id="count">
-    </div>
-
-    <script src="../JS/index.js"></script>
     <script src="../JS/common.js"></script>
+    <script src="../JS/settings.js"></script>
+    <script src="../JS/products.js"></script>
 </body>
-
 </html>

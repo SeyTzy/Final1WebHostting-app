@@ -1,55 +1,776 @@
 <!DOCTYPE html>
-<html lang="km">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InvenTrack | Settings</title>
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Hanuman:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
 <body>
-    <div class="dashboard-container">
-        <!-- Sidebar placeholder -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo"><i class="fas fa-cube"></i><span>InvenTrack</span></div>
+    <div class="app">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand"><a href="dashboard.html"><i class="fas fa-cube"></i><span>InvenTrack</span></a></div>
+            <div class="sidebar-profile">
+                <div class="profile-card"><img src="/Image/My Pf.jpg" alt="Profile" class="profile-avatar"><div><div class="profile-name">THOEURN SEYHAT</div><div class="profile-role">Web Developer</div><div class="profile-contact"><a href="contact.html"><i class="fas fa-envelope"></i> thoeurnseyhat@gmail.com</a></div></div></div>
             </div>
             <nav class="sidebar-nav">
-                <a href="dashboard.html" class="nav-item"><i class="fas fa-home"></i><span>ផ្ទាំងគ្រប់គ្រង</span></a>
-                <a href="settings.html" class="nav-item active"><i class="fas fa-sliders"></i><span>ការកំណត់</span></a>
+                <a href="dashboard.html" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                <div class="nav-group"><button class="nav-toggle"><i class="fas fa-box-archive"></i><span>Products</span><i class="fas fa-chevron-right nav-arrow"></i></button><div class="sub-nav"><a href="products-add.html" class="sub-link">Add Product</a><a href="products-list.html" class="sub-link">Product List</a></div></div>
+                <div class="nav-group"><button class="nav-toggle"><i class="fas fa-layer-group"></i><span>Categories</span><i class="fas fa-chevron-right nav-arrow"></i></button><div class="sub-nav"><a href="categories-add.html" class="sub-link">Add Category</a><a href="categories-list.html" class="sub-link">Category List</a></div></div>
+                <div class="nav-group"><button class="nav-toggle"><i class="fas fa-cart-shopping"></i><span>Orders</span><i class="fas fa-chevron-right nav-arrow"></i></button><div class="sub-nav"><a href="orders-add.html" class="sub-link">Add Order</a><a href="orders-list.html" class="sub-link">Order List</a></div></div>
+                <div class="nav-group"><button class="nav-toggle"><i class="fas fa-user-group"></i><span>Users</span><i class="fas fa-chevron-right nav-arrow"></i></button><div class="sub-nav"><a href="users-add.html" class="sub-link">Add User</a><a href="users-list.html" class="sub-link">User List</a></div></div>
+                <a href="settings.html" class="nav-link active"><i class="fas fa-sliders"></i><span>Settings</span></a>
             </nav>
+            <div class="sidebar-footer"><div class="user-row"><div class="user-avatar-sm">AD</div><div><div class="user-name-sm">Admin User</div><div class="user-role-sm">Administrator</div></div></div></div>
         </aside>
-
-        <main class="main-content">
-            <header class="content-header">
-                <h1>ការកំណត់ប្រព័ន្ធ</h1>
-                <p>Configure your application preferences and security.</p>
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <div class="main">
+            <header class="topbar">
+                <div class="topbar-left"><button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button><span class="topbar-title">Settings</span></div>
+                <div class="topbar-right"></div>
             </header>
-
-            <section class="card">
-                <div class="card-header">
-                    <h3><i class="fas fa-gears"></i> ការកំណត់ទូទៅ <span>General Settings</span></h3>
+            <main class="content">
+                <div class="page-header">
+                    <h1 class="page-title">Settings</h1>
+                    <p class="page-desc">Configure your application preferences and manage your account.</p>
                 </div>
-                <div class="form-grid">
-                    <div class="form-group"><label>ឈ្មោះហាង <span>Store Name</span></label><input type="text"
-                            value="InvenTrack Pro"></div>
-                    <div class="form-group"><label>រូបិយប័ណ្ណ <span>Currency</span></label><input type="text"
-                            value="USD ($)"></div>
-                    <div class="form-actions"><button class="btn-primary">រក្សាទុកការកំណត់</button></div>
-                    <div class="form-actions">
-                        <button id="logoutBtn" class="btn-primary">Log Out</button>
+
+                <div class="settings-container">
+                    <!-- General Settings -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <div class="settings-icon"><i class="fas fa-store"></i></div>
+                            <div>
+                                <h3 class="settings-card-title">General</h3>
+                                <p class="settings-card-desc">Store name and currency preferences</p>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <div class="form-group" style="margin-bottom:20px">
+                                <label class="form-label">Store Name</label>
+                                <input type="text" class="form-input" id="settingStoreName" placeholder="Your store name">
+                            </div>
+                            <div class="form-group" style="margin-bottom:8px">
+                                <label class="form-label">Currency</label>
+                                <p class="settings-subtext">Choose the currency for displaying prices</p>
+                            </div>
+                            <div class="currency-options">
+                                <label class="currency-option active" data-value="$">
+                                    <input type="radio" name="currency" value="$" checked>
+                                    <div class="currency-option-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <div class="currency-option-info">
+                                        <span class="currency-option-name">USD</span>
+                                        <span class="currency-option-sym">$</span>
+                                    </div>
+                                    <div class="currency-option-check"><i class="fas fa-check"></i></div>
+                                </label>
+                                <label class="currency-option" data-value="៛">
+                                    <input type="radio" name="currency" value="៛">
+                                    <div class="currency-option-icon"><i class="fas fa-coins"></i></div>
+                                    <div class="currency-option-info">
+                                        <span class="currency-option-name">Riel</span>
+                                        <span class="currency-option-sym">៛</span>
+                                    </div>
+                                    <div class="currency-option-check"><i class="fas fa-check"></i></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <div class="settings-icon"><i class="fas fa-palette"></i></div>
+                            <div>
+                                <h3 class="settings-card-title">Appearance</h3>
+                                <p class="settings-card-desc">Change how your UI looks and feels</p>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <!-- Accent Color -->
+                            <div class="settings-section">
+                                <label class="settings-label">Accent color</label>
+                                <p class="settings-subtext">Pick a color for buttons, links and active states</p>
+                                <div class="accent-swatches">
+                                    <button class="swatch" data-color="#6366f1" style="background:#6366f1" title="Indigo"><i class="fas fa-check"></i></button>
+                                    <button class="swatch" data-color="#8b5cf6" style="background:#8b5cf6" title="Purple"></button>
+                                    <button class="swatch" data-color="#3b82f6" style="background:#3b82f6" title="Blue"></button>
+                                    <button class="swatch" data-color="#06b6d4" style="background:#06b6d4" title="Cyan"></button>
+                                    <button class="swatch" data-color="#22c55e" style="background:#22c55e" title="Green"></button>
+                                    <button class="swatch" data-color="#f59e0b" style="background:#f59e0b" title="Amber"></button>
+                                    <button class="swatch" data-color="#ef4444" style="background:#ef4444" title="Red"></button>
+                                    <button class="swatch" data-color="#ec4899" style="background:#ec4899" title="Pink"></button>
+                                    <label class="swatch custom-swatch">
+                                        <i class="fas fa-plus"></i>
+                                        <input type="color" id="customColor" value="#6366f1">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Theme -->
+                            <div class="settings-section" style="margin-top:28px">
+                                <label class="settings-label">Interface theme</label>
+                                <p class="settings-subtext">Choose how the dashboard appears</p>
+                                <div class="theme-options">
+                                    <label class="theme-card active" data-theme="system">
+                                        <input type="radio" name="theme" value="system" checked>
+                                        <div class="theme-preview">
+                                            <div class="theme-preview-half light"></div>
+                                            <div class="theme-preview-half dark"></div>
+                                        </div>
+                                        <span class="theme-name">System</span>
+                                        <div class="theme-check"><i class="fas fa-check"></i></div>
+                                    </label>
+                                    <label class="theme-card" data-theme="light">
+                                        <input type="radio" name="theme" value="light">
+                                        <div class="theme-preview">
+                                            <div class="theme-preview-half light-full"></div>
+                                        </div>
+                                        <span class="theme-name">Light</span>
+                                        <div class="theme-check"><i class="fas fa-check"></i></div>
+                                    </label>
+                                    <label class="theme-card" data-theme="dark">
+                                        <input type="radio" name="theme" value="dark">
+                                        <div class="theme-preview">
+                                            <div class="theme-preview-half dark-full"></div>
+                                        </div>
+                                        <span class="theme-name">Dark</span>
+                                        <div class="theme-check"><i class="fas fa-check"></i></div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Options -->
+                            <div class="settings-section" style="margin-top:28px">
+                                <label class="settings-label">Options</label>
+                                <p class="settings-subtext">Toggle display preferences</p>
+                                <div class="option-row">
+                                    <span class="option-label">Group items</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="optGroup" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="option-row">
+                                    <span class="option-label">Show sub-issues</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="optSubIssues" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="option-row">
+                                    <span class="option-label">Default order</span>
+                                    <select class="form-select" id="optOrder">
+                                        <option value="created">Last created</option>
+                                        <option value="name">By name</option>
+                                        <option value="price">By price</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <div class="settings-icon"><i class="fas fa-address-card"></i></div>
+                            <div>
+                                <h3 class="settings-card-title">Contact</h3>
+                                <p class="settings-card-desc">Manage your contact details</p>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <p class="settings-body-text">Update your email, phone, social links and more.</p>
+                            <a href="contact.html" class="btn btn-primary" style="margin-top:16px"><i class="fas fa-edit"></i> Edit Contact</a>
+                        </div>
+                    </div>
+
+                    <!-- Account -->
+                    <div class="settings-card">
+                        <div class="settings-card-header">
+                            <div class="settings-icon danger"><i class="fas fa-right-from-bracket"></i></div>
+                            <div>
+                                <h3 class="settings-card-title">Account</h3>
+                                <p class="settings-card-desc">Sign out of your session</p>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <p class="settings-body-text">Signing out will return you to the login page. Your data will remain saved.</p>
+                            <button class="btn btn-danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+                        </div>
+                    </div>
+
+                    <!-- Footer Actions -->
+                    <div class="settings-actions">
+                        <button class="btn btn-ghost" id="resetDefaults"><i class="fas fa-rotate-left"></i> Reset to default</button>
+                        <div class="settings-actions-right">
+                            <button class="btn btn-secondary" id="cancelSettings">Cancel</button>
+                            <button class="btn btn-primary" id="saveSettings"><i class="fas fa-check"></i> Save changes</button>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </main>
+            </main>
+        </div>
     </div>
-    <script src="../JS/common.js"></script>
-    <script src="../JS/Logout.js"></script>
-</body>
 
+    <style>
+        .settings-container {
+            max-width: 720px;
+        }
+
+        .settings-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: box-shadow 0.2s;
+        }
+
+        .settings-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .settings-card-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 24px 28px 0;
+        }
+
+        .settings-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--primary-bg);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .settings-icon.danger {
+            background: #fef2f2;
+            color: var(--danger);
+        }
+
+        .settings-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .settings-card-desc {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .settings-card-body {
+            padding: 24px 28px 28px;
+        }
+
+        .settings-body-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .settings-section {
+            margin-bottom: 0;
+        }
+
+        .settings-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .settings-subtext {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        /* Currency Options */
+        .currency-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .currency-option {
+            position: relative;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .currency-option:hover {
+            border-color: var(--primary-light);
+        }
+
+        .currency-option.active {
+            border-color: var(--primary);
+            background: var(--primary-bg);
+        }
+
+        .currency-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .currency-option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .currency-option:nth-child(1) .currency-option-icon {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .currency-option:nth-child(2) .currency-option-icon {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .currency-option-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .currency-option-name {
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: var(--text-primary);
+        }
+
+        .currency-option-sym {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .currency-option-check {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: 0.6rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .currency-option.active .currency-option-check {
+            display: flex;
+        }
+
+        /* Accent Swatches */
+        .accent-swatches {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .swatch {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.75rem;
+        }
+
+        .swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .swatch.active {
+            border-color: var(--text-primary);
+            box-shadow: 0 0 0 2px white, 0 0 0 4px currentColor;
+        }
+
+        .swatch.active i {
+            display: block;
+        }
+
+        .swatch i {
+            display: none;
+            font-size: 0.7rem;
+        }
+
+        .swatch.custom-swatch {
+            background: #f1f5f9;
+            border: 2px dashed var(--border);
+            color: var(--text-muted);
+            border-radius: 50%;
+        }
+
+        .swatch.custom-swatch:hover {
+            border-color: var(--text-muted);
+        }
+
+        .swatch.custom-swatch input[type="color"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Theme Options */
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .theme-card {
+            position: relative;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .theme-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 2px 8px var(--primary-bg);
+        }
+
+        .theme-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-bg), 0 2px 8px var(--primary-bg);
+        }
+
+        .theme-card input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .theme-preview {
+            width: 100%;
+            height: 56px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            border: 1px solid var(--border);
+        }
+
+        .theme-preview-half {
+            flex: 1;
+        }
+
+        .theme-preview-half.light {
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .theme-preview-half.light::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 30%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .theme-preview-half.light::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 6px;
+            right: 6px;
+            height: 24px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .theme-preview-half.dark {
+            background: #1e293b;
+            position: relative;
+        }
+
+        .theme-preview-half.dark::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 30%;
+            height: 6px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 3px;
+        }
+
+        .theme-preview-half.dark::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 6px;
+            right: 6px;
+            height: 24px;
+            background: #334155;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .theme-preview-half.light-full {
+            background: #f8fafc;
+            position: relative;
+        }
+
+        .theme-preview-half.light-full::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 8px;
+            width: 35%;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .theme-preview-half.light-full::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 8px;
+            right: 8px;
+            height: 20px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .theme-preview-half.dark-full {
+            background: #1e293b;
+            position: relative;
+        }
+
+        .theme-preview-half.dark-full::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 8px;
+            width: 35%;
+            height: 6px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 3px;
+        }
+
+        .theme-preview-half.dark-full::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 8px;
+            right: 8px;
+            height: 20px;
+            background: #334155;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .theme-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .theme-check {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            font-size: 0.55rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-card.active .theme-check {
+            display: flex;
+        }
+
+        /* Toggle Switches */
+        .option-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .option-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .option-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: #cbd5e1;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: white;
+            top: 3px;
+            left: 3px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--primary);
+        }
+
+        .toggle-switch input:checked + .toggle-slider::before {
+            transform: translateX(20px);
+        }
+
+        .form-select {
+            height: 36px;
+            padding: 0 32px 0 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            font-size: 0.8125rem;
+            color: var(--text-primary);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-bg);
+        }
+
+        /* Footer Actions */
+        .settings-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .settings-actions-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .settings-card-header,
+            .settings-card-body {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .theme-options {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .settings-actions-right {
+                justify-content: stretch;
+            }
+
+            .settings-actions-right .btn {
+                flex: 1;
+            }
+
+            .currency-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        #logoutBtn {
+            margin-top: 16px;
+        }
+    </style>
+
+    <script src="../JS/common.js"></script>
+    <script src="../JS/settings.js"></script>
+</body>
 </html>

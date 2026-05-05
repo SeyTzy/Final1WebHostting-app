@@ -1,66 +1,104 @@
-// Data aggregation for Categories
-function loadCategories() {
-    let dataPro = JSON.parse(localStorage.getItem('product')) || [];
-    let categoriesMap = {};
+var categories = JSON.parse(localStorage.getItem("inven_categories") || "[]");
 
-    // Aggregate data
-    dataPro.forEach(pro => {
-        let cat = pro.category.toLowerCase().trim();
-        if (!categoriesMap[cat]) {
-            categoriesMap[cat] = {
-                name: pro.category,
-                count: 0, // This will store total Qty
-                totalValue: 0
-            };
+function saveCategories() {
+    localStorage.setItem("inven_categories", JSON.stringify(categories));
+}
+
+function renderCategories() {
+    var body = document.getElementById("categoryBody");
+    if (!body) return;
+
+    var products = JSON.parse(localStorage.getItem("inven_products") || "[]");
+    var catMap = {};
+    products.forEach(function(p) {
+        if (!catMap[p.category]) catMap[p.category] = { count: 0, total: 0 };
+        catMap[p.category].count++;
+        catMap[p.category].total += +p.total;
+    });
+
+    var html = "";
+    if (categories.length === 0) {
+        html = "<tr><td colspan='5' class='empty-state'><i class='fas fa-layer-group'></i><div>No categories yet</div></td></tr>";
+    } else {
+        for (var i = 0; i < categories.length; i++) {
+            var info = catMap[categories[i]] || { count: 0, total: 0 };
+            html += "<tr>";
+            html += "<td>" + (i + 1) + "</td>";
+            html += "<td>" + categories[i] + "</td>";
+            html += "<td><span class='badge badge-gray'>" + info.count + "</span></td>";
+            html += "<td style='font-weight:600;color:var(--primary)'>" + formatMoney(info.total) + "</td>";
+            html += "<td><button onclick='editCat(" + i + ")' class='btn-icon edit' title='Edit'><i class='fas fa-edit'></i></button><button onclick='deleteCat(" + i + ")' class='btn-icon delete' title='Delete'><i class='fas fa-trash'></i></button></td>";
+            html += "</tr>";
         }
-        // Sum the actual quantity of each product entry
-        categoriesMap[cat].count += (+pro.count || 1);
-        categoriesMap[cat].totalValue += (+pro.total || 0);
-    });
-
-    let catArray = Object.values(categoriesMap);
-    renderTable(catArray);
-    updateStats(catArray, dataPro.length);
+    }
+    body.innerHTML = html;
 }
 
-function renderTable(categories) {
-    let table = '';
-    categories.forEach((cat, i) => {
-        table += `
-        <tr>
-            <td>${i + 1}</td>
-            <td><span class="badge" style="font-size: 1rem; padding: 8px 16px;">${cat.name}</span></td>
-            <td>${cat.count}</td>
-            <td style="font-weight: 700; color: var(--primary)">$${cat.totalValue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-            <td>
-                <button onclick="editCategory('${cat.name.replace(/'/g, "\\'")}')" class="update-btn" title="កែប្រែប្រភេទ"><i class="fas fa-edit"></i></button>
-                <button onclick="deleteCategory('${cat.name.replace(/'/g, "\\'")}')" class="delete-btn" title="លុបប្រភេទ"><i class="fas fa-trash"></i></button>
-            </td>
-        </tr>
-        `;
-    });
-
-    document.getElementById('categoryBody').innerHTML = table || '<tr><td colspan="5" style="text-align:center; padding: 40px;">មិនទាន់មានទិន្នន័យនៅឡើយទេ</td></tr>';
-}
-
-function editCategory(catName) {
-    localStorage.setItem('editCategoryName', catName);
-    location.href = 'categories-add.html';
-}
-
-function deleteCategory(catName) {
-    if (confirm(`តើអ្នកពិតជាចង់លុបទំនិញទាំងអស់ក្នុងប្រភេទ "${catName}" មែនទេ?`)) {
-        let dataPro = JSON.parse(localStorage.getItem('product')) || [];
-        dataPro = dataPro.filter(pro => pro.category.toLowerCase().trim() !== catName.toLowerCase().trim());
-        localStorage.setItem('product', JSON.stringify(dataPro));
-        loadCategories();
+function editCat(i) {
+    var newName = prompt("Edit category name:", categories[i]);
+    if (newName !== null) {
+        newName = newName.trim().toLowerCase();
+        if (newName && newName !== categories[i]) {
+            if (categories.indexOf(newName) !== -1) {
+                alert("Category already exists.");
+                return;
+            }
+            categories[i] = newName;
+            saveCategories();
+            renderCategories();
+            populateCategoryDropdown();
+        }
     }
 }
 
-function updateStats(categories, totalItems) {
-    document.getElementById('statTotalCategories').innerHTML = categories.length;
-    document.getElementById('statTotalItems').innerHTML = totalItems;
+function deleteCat(i) {
+    if (!confirm("Delete \"" + categories[i] + "\"?")) return;
+    categories.splice(i, 1);
+    saveCategories();
+    renderCategories();
+    populateCategoryDropdown();
 }
 
-// Initial call
-loadCategories();
+var submitCat = document.getElementById("submitCat");
+var catNameEl = document.getElementById("catName");
+
+if (submitCat && catNameEl) {
+    submitCat.addEventListener("click", function() {
+        var name = catNameEl.value.trim().toLowerCase();
+        if (!name) {
+            alert("Please enter a category name.");
+            return;
+        }
+
+        if (categories.indexOf(name) !== -1) {
+            alert("Category already exists.");
+            return;
+        }
+
+        categories.push(name);
+        saveCategories();
+        catNameEl.value = "";
+        populateCategoryDropdown();
+        renderCategories();
+    });
+}
+
+function populateCategoryDropdown() {
+    var select = document.getElementById("pCategory");
+    if (!select) return;
+
+    var current = select.value;
+    select.innerHTML = '<option value="">Select category...</option>';
+
+    categories.forEach(function(cat) {
+        var opt = document.createElement("option");
+        opt.value = cat;
+        opt.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+        select.appendChild(opt);
+    });
+
+    select.value = current;
+}
+
+renderCategories();
+populateCategoryDropdown();
